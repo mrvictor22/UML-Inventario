@@ -30,5 +30,23 @@ return [
         ],
     ],
 
+    'bodega-tbl' => [
+        'title' => 'Bodega Tbl',
+
+        'actions' => [
+            'index' => 'Bodega Tbl',
+            'create' => 'New Bodega Tbl',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'nombre' => 'Nombre',
+            'direccion' => 'Direccion',
+            'tel' => 'Tel',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];
