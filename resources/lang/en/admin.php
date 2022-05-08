@@ -65,5 +65,29 @@ return [
         ],
     ],
 
+    'provedores-tbl' => [
+        'title' => 'Provedores Tbl',
+
+        'actions' => [
+            'index' => 'Provedores Tbl',
+            'create' => 'New Provedores Tbl',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'nombre' => 'Nombre',
+            'nombre_empresa' => 'Nombre empresa',
+            'email' => 'Email',
+            'numer_telefono' => 'Numer telefono',
+            'direccion' => 'Direccion',
+            'ciudad' => 'Ciudad',
+            'pais' => 'Pais',
+            'provedor_desde' => 'Provedor desde',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

@@ -40,3 +40,21 @@ $factory->define(App\Models\Role::class, static function (Faker\Generator $faker
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\ProvedoresTbl::class, static function (Faker\Generator $faker) {
+    return [
+        'nombre' => $faker->sentence,
+        'nombre_empresa' => $faker->sentence,
+        'email' => $faker->email,
+        'numer_telefono' => $faker->sentence,
+        'direccion' => $faker->sentence,
+        'ciudad' => $faker->sentence,
+        'pais' => $faker->sentence,
+        'provedor_desde' => $faker->date(),
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

@@ -73,3 +73,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('provedores-tbls')->name('provedores-tbls/')->group(static function() {
+            Route::get('/',                                             'ProvedoresTblController@index')->name('index');
+            Route::get('/create',                                       'ProvedoresTblController@create')->name('create');
+            Route::post('/',                                            'ProvedoresTblController@store')->name('store');
+            Route::get('/{provedoresTbl}/edit',                         'ProvedoresTblController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ProvedoresTblController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{provedoresTbl}',                             'ProvedoresTblController@update')->name('update');
+            Route::delete('/{provedoresTbl}',                           'ProvedoresTblController@destroy')->name('destroy');
+        });
+    });
+});
