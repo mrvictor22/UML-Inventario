@@ -89,5 +89,26 @@ return [
         ],
     ],
 
+    'producto-tbl' => [
+        'title' => 'Producto Tbl',
+
+        'actions' => [
+            'index' => 'Producto Tbl',
+            'create' => 'New Producto Tbl',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'nombre' => 'Nombre',
+            'prod_cod' => 'Prod cod',
+            'marca' => 'Marca',
+            'costo' => 'Costo',
+            'precio' => 'Precio',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

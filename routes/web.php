@@ -88,3 +88,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('producto-tbls')->name('producto-tbls/')->group(static function() {
+            Route::get('/',                                             'ProductoTblController@index')->name('index');
+            Route::get('/create',                                       'ProductoTblController@create')->name('create');
+            Route::post('/',                                            'ProductoTblController@store')->name('store');
+            Route::get('/{productoTbl}/edit',                           'ProductoTblController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ProductoTblController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{productoTbl}',                               'ProductoTblController@update')->name('update');
+            Route::delete('/{productoTbl}',                             'ProductoTblController@destroy')->name('destroy');
+        });
+    });
+});

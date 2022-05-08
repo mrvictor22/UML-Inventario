@@ -58,3 +58,18 @@ $factory->define(App\Models\ProvedoresTbl::class, static function (Faker\Generat
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\ProductoTbl::class, static function (Faker\Generator $faker) {
+    return [
+        'nombre' => $faker->sentence,
+        'prod_cod' => $faker->sentence,
+        'marca' => $faker->sentence,
+        'costo' => $faker->randomFloat,
+        'precio' => $faker->randomFloat,
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
