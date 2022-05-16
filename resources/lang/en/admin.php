@@ -110,5 +110,25 @@ return [
         ],
     ],
 
+    'producto-bodega-tbl' => [
+        'title' => 'Producto Bodega Tbl',
+
+        'actions' => [
+            'index' => 'Producto Bodega Tbl',
+            'create' => 'New Producto Bodega Tbl',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'producto_id' => 'Producto',
+            'bodega_id' => 'Bodega',
+            'ubicacion_codigo' => 'Ubicacion codigo',
+            'cantidad' => 'Cantidad',
+            'nota' => 'Nota',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

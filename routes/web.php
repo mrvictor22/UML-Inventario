@@ -103,3 +103,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('producto-bodega-tbls')->name('producto-bodega-tbls/')->group(static function() {
+            Route::get('/',                                             'ProductoBodegaTblController@index')->name('index');
+            Route::get('/create',                                       'ProductoBodegaTblController@create')->name('create');
+            Route::post('/',                                            'ProductoBodegaTblController@store')->name('store');
+            Route::get('/{productoBodegaTbl}/edit',                     'ProductoBodegaTblController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ProductoBodegaTblController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{productoBodegaTbl}',                         'ProductoBodegaTblController@update')->name('update');
+            Route::delete('/{productoBodegaTbl}',                       'ProductoBodegaTblController@destroy')->name('destroy');
+        });
+    });
+});

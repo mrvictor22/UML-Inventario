@@ -29,6 +29,13 @@ class ProductoTbl extends Model
 
     /* ************************ ACCESSOR ************************* */
 
+    public function productoInventario()
+{
+    return $this->hasMany(ProductoBodegaTbl::class);
+}
+
+
+    
     public function getResourceUrlAttribute()
     {
         return url('/admin/producto-tbls/'.$this->getKey());

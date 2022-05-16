@@ -73,3 +73,17 @@ $factory->define(App\Models\ProductoTbl::class, static function (Faker\Generator
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\ProductoBodegaTbl::class, static function (Faker\Generator $faker) {
+    return [
+        'producto_id' => $faker->randomNumber(5),
+        'bodega_id' => $faker->randomNumber(5),
+        'ubicacion_codigo' => $faker->sentence,
+        'cantidad' => $faker->randomNumber(5),
+        'nota' => $faker->text(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

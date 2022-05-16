@@ -30,4 +30,9 @@ class BodegaTbl extends Model
     {
         return url('/admin/bodega-tbls/'.$this->getKey());
     }
+
+    public function productoBodega()
+{
+    return $this->hasMany(ProductoBodegaTbl::class);
+}
 }
