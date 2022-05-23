@@ -4,7 +4,8 @@ Vue.component('producto-bodega-tbl-form', {
     mixins: [AppForm],
     props: [
         'producto_id',
-        'bodega_tbl'
+        'bodega_tbl',
+        'user'
     ],
     data: function() {
         return {

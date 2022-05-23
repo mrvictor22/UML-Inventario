@@ -39,7 +39,7 @@ class ProductoBodegaTblController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'producto_id', 'bodega_id', 'ubicacion_codigo', 'cantidad'],
+            ['id', 'nombre', 'bodega_id', 'ubicacion_codigo', 'cantidad'],
 
             // set columns to searchIn
             ['id', 'producto_tbl.nombre', 'ubicacion_codigo', 'nota'],
@@ -63,16 +63,20 @@ class ProductoBodegaTblController extends Controller
 
             //     $query->join('producto_tbl', 'producto_tbl.id', '=', 'producto_bodega_tbl.producto_id');
             // }
+           
+
         );
 
+        // $id_prod = $data->pluck('producto_id');
+        // // $n_prod = ProductoTbl::where('id', $id_prod)->first();
+
         
+        DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , producto_tbl SET producto_bodega_tbl.nombre = producto_tbl.nombre where producto_bodega_tbl.producto_id=producto_tbl.id');
+        // $id_prod = ProductoTbl::all()->pluck('nombre');
+
+        // dd($data);
 
         if ($request->ajax()) {
-            if ($request->has('bulk')) {
-                return [
-                    'bulkItems' => $data->pluck('id')
-                ];
-            }
             return ['data' => $data];
         }
         

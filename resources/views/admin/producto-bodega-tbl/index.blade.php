@@ -6,6 +6,7 @@
 
     <producto-bodega-tbl-listing
         :data="{{ $data->toJson() }}"
+        :producto_id="{{ $producto_tbl->toJson() }}"
         :url="'{{ url('admin/producto-bodega-tbls') }}'"
         inline-template>
 
@@ -78,7 +79,7 @@
                                         </td>
 
                                     <td>@{{ item.id }}</td>
-                                        <td>@{{ item.producto_id }}</td>
+                                        <td>@{{ item.nombre }}</td>
                                         <td>@{{ item.bodega_id }}</td>
                                         <td>@{{ item.ubicacion_codigo }}</td>
                                         <td>@{{ item.cantidad }}</td>
