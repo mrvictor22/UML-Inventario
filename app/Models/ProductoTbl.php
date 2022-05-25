@@ -33,6 +33,10 @@ class ProductoTbl extends Model
 {
     return $this->hasMany(ProductoBodegaTbl::class);
 }
+    public function productoCompras()
+{
+    return $this->hasMany(ComprasTbl::class);
+}
 
 
     

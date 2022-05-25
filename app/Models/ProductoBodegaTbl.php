@@ -11,6 +11,7 @@ class ProductoBodegaTbl extends Model
     protected $fillable = [
         'producto_id',
         'bodega_id',
+        'bodega_nombre',
         'ubicacion_codigo',
         'cantidad',
         'nota',

@@ -39,7 +39,7 @@ class ProductoBodegaTblController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'nombre', 'bodega_id', 'ubicacion_codigo', 'cantidad'],
+            ['id', 'nombre', 'bodega_nombre', 'ubicacion_codigo', 'cantidad'],
 
             // set columns to searchIn
             ['id', 'producto_tbl.nombre', 'ubicacion_codigo', 'nota'],
@@ -72,6 +72,7 @@ class ProductoBodegaTblController extends Controller
 
         
         DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , producto_tbl SET producto_bodega_tbl.nombre = producto_tbl.nombre where producto_bodega_tbl.producto_id=producto_tbl.id');
+        DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , bodega_tbl SET producto_bodega_tbl.bodega_id = bodega_tbl.id, producto_bodega_tbl.bodega_nombre = bodega_tbl.nombre where  bodega_tbl.id = 5 ');
         // $id_prod = ProductoTbl::all()->pluck('nombre');
 
         // dd($data);
@@ -109,8 +110,8 @@ class ProductoBodegaTblController extends Controller
         $sanitized = $request->getSanitized();
         // $sanitized['bodega_id'] = $request->getBodegaTblId();
         $sanitized['producto_id'] = $request->getProductoTblId();
-        info($sanitized['producto_id']);
-        info($request);
+        // info($sanitized['producto_id']);
+        // info($request);
         // Store the ProductoBodegaTbl
         $productoBodegaTbl = ProductoBodegaTbl::create($sanitized);
 

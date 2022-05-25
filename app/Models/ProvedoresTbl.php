@@ -37,4 +37,10 @@ class ProvedoresTbl extends Model
     {
         return url('/admin/provedores-tbls/'.$this->getKey());
     }
+
+    public function proovedorCompras()
+    {
+        return $this->hasMany(ComprasTbl::class);
+    }
+    
 }

@@ -80,7 +80,7 @@
 
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.nombre }}</td>
-                                        <td>@{{ item.bodega_id }}</td>
+                                        <td>@{{ item.bodega_nombre }}</td>
                                         <td>@{{ item.ubicacion_codigo }}</td>
                                         <td>@{{ item.cantidad }}</td>
                                         
