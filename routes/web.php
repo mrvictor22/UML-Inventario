@@ -118,3 +118,18 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('compras-tbls')->name('compras-tbls/')->group(static function() {
+            Route::get('/',                                             'ComprasTblController@index')->name('index');
+            Route::get('/create',                                       'ComprasTblController@create')->name('create');
+            Route::post('/',                                            'ComprasTblController@store')->name('store');
+            Route::get('/{comprasTbl}/edit',                            'ComprasTblController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ComprasTblController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{comprasTbl}',                                'ComprasTblController@update')->name('update');
+            Route::delete('/{comprasTbl}',                              'ComprasTblController@destroy')->name('destroy');
+        });
+    });
+});

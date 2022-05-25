@@ -6,3 +6,4 @@ import './role';
 import './provedores-tbl';
 import './producto-tbl';
 import './producto-bodega-tbl';
+import './compras-tbl';

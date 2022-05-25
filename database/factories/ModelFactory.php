@@ -87,3 +87,20 @@ $factory->define(App\Models\ProductoBodegaTbl::class, static function (Faker\Gen
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\ComprasTbl::class, static function (Faker\Generator $faker) {
+    return [
+        'nombre_producto' => $faker->sentence,
+        'producto_id' => $faker->randomNumber(5),
+        'nombre_proveedor' => $faker->sentence,
+        'proovedor_id' => $faker->randomNumber(5),
+        'descripcion' => $faker->text(),
+        'fecha_pedido' => $faker->date(),
+        'fecha_entregado' => $faker->date(),
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

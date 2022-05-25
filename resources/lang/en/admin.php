@@ -130,5 +130,28 @@ return [
         ],
     ],
 
+    'compras-tbl' => [
+        'title' => 'Compras Tbl',
+
+        'actions' => [
+            'index' => 'Compras Tbl',
+            'create' => 'New Compras Tbl',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'nombre_producto' => 'Nombre producto',
+            'producto_id' => 'Producto',
+            'nombre_proveedor' => 'Nombre proveedor',
+            'proovedor_id' => 'Proovedor',
+            'descripcion' => 'Descripcion',
+            'fecha_pedido' => 'Fecha pedido',
+            'fecha_entregado' => 'Fecha entregado',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];
