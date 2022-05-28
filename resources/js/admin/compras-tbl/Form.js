@@ -2,6 +2,10 @@ import AppForm from '../app-components/Form/AppForm';
 
 Vue.component('compras-tbl-form', {
     mixins: [AppForm],
+    props: [
+        'producto_id'
+        
+    ],
     data: function() {
         return {
             form: {

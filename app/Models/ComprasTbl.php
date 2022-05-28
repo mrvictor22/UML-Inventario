@@ -37,4 +37,8 @@ class ComprasTbl extends Model
     {
         return url('/admin/compras-tbls/'.$this->getKey());
     }
+
+    public function productos() {
+        return $this->belongsTo(ProductoTbl::class);
+    }
 }

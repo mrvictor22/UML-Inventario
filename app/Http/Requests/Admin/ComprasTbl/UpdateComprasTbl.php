@@ -26,10 +26,10 @@ class UpdateComprasTbl extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre_producto' => ['nullable', 'string'],
-            'producto_id' => ['nullable', 'integer'],
-            'nombre_proveedor' => ['nullable', 'string'],
-            'proovedor_id' => ['nullable', 'integer'],
+            'nombre_producto' => ['nullable'],
+            'producto_id' => ['nullable'],
+            'nombre_proveedor' => ['nullable'],
+            'proovedor_id' => ['nullable'],
             'descripcion' => ['nullable', 'string'],
             'fecha_pedido' => ['nullable', 'date'],
             'fecha_entregado' => ['nullable', 'date'],
@@ -51,5 +51,12 @@ class UpdateComprasTbl extends FormRequest
         //Add your code for manipulation with request data here
 
         return $sanitized;
+    }
+    public function getProductoTblId(){
+        if ($this->has('producto_id')){
+            return $this->get('producto_id')['id'];
+        }
+
+        return null;
     }
 }

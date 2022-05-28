@@ -51,7 +51,7 @@
 
                                         <th is='sortable' :column="'id'">{{ trans('admin.compras-tbl.columns.id') }}</th>
                                         <th is='sortable' :column="'nombre_producto'">{{ trans('admin.compras-tbl.columns.nombre_producto') }}</th>
-                                        <th is='sortable' :column="'producto_id'">{{ trans('admin.compras-tbl.columns.producto_id') }}</th>
+                                       
                                         <th is='sortable' :column="'nombre_proveedor'">{{ trans('admin.compras-tbl.columns.nombre_proveedor') }}</th>
                                         <th is='sortable' :column="'proovedor_id'">{{ trans('admin.compras-tbl.columns.proovedor_id') }}</th>
                                         <th is='sortable' :column="'fecha_pedido'">{{ trans('admin.compras-tbl.columns.fecha_pedido') }}</th>
@@ -82,7 +82,7 @@
 
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.nombre_producto }}</td>
-                                        <td>@{{ item.producto_id }}</td>
+                                     
                                         <td>@{{ item.nombre_proveedor }}</td>
                                         <td>@{{ item.proovedor_id }}</td>
                                         <td>@{{ item.fecha_pedido | date }}</td>

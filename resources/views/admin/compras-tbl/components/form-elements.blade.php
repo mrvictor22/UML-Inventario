@@ -1,16 +1,38 @@
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('nombre_producto'), 'has-success': fields.nombre_producto && fields.nombre_producto.valid }">
+{{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('nombre_producto'), 'has-success': fields.nombre_producto && fields.nombre_producto.valid }">
     <label for="nombre_producto" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.compras-tbl.columns.nombre_producto') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.nombre_producto" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('nombre_producto'), 'form-control-success': fields.nombre_producto && fields.nombre_producto.valid}" id="nombre_producto" name="nombre_producto" placeholder="{{ trans('admin.compras-tbl.columns.nombre_producto') }}">
         <div v-if="errors.has('nombre_producto')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('nombre_producto') }}</div>
     </div>
-</div>
+</div> --}}
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('producto_id'), 'has-success': fields.producto_id && fields.producto_id.valid }">
+{{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('producto_id'), 'has-success': fields.producto_id && fields.producto_id.valid }">
     <label for="producto_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.compras-tbl.columns.producto_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.producto_id" v-validate="'integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('producto_id'), 'form-control-success': fields.producto_id && fields.producto_id.valid}" id="producto_id" name="producto_id" placeholder="{{ trans('admin.compras-tbl.columns.producto_id') }}">
         <div v-if="errors.has('producto_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('producto_id') }}</div>
+    </div>
+</div> --}}
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('producto_id'), 'has-success': this.fields.producto_id && this.fields.producto_id.valid }">
+    <label for="producto_id"
+    class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">Producto</label>
+           <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            v-model="form.producto_id"
+            :options="producto_id"
+            :multiple="false"
+            track-by="id"
+            label="nombre"
+            tag-placeholder="{{ __('Seleccionar productos') }}"
+            placeholder="{{ __('Productos') }}">
+        </multiselect>
+
+        <div v-if="errors.has('producto_id')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('producto_id') }}
+        </div>
     </div>
 </div>
 

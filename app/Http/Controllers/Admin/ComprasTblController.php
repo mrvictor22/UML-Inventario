@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\ComprasTbl\DestroyComprasTbl;
 use App\Http\Requests\Admin\ComprasTbl\IndexComprasTbl;
 use App\Http\Requests\Admin\ComprasTbl\StoreComprasTbl;
 use App\Http\Requests\Admin\ComprasTbl\UpdateComprasTbl;
+use App\Models\ProductoTbl;
 use App\Models\ComprasTbl;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -37,22 +38,31 @@ class ComprasTblController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'nombre_producto', 'producto_id', 'nombre_proveedor', 'proovedor_id', 'fecha_pedido', 'fecha_entregado', 'enabled'],
+            ['id', 'nombre_producto', 'nombre_proveedor', 'proovedor_id', 'fecha_pedido', 'fecha_entregado', 'enabled'],
 
             // set columns to searchIn
-            ['id', 'nombre_producto', 'nombre_proveedor', 'descripcion']
-        );
+            ['id', 'nombre_producto', 'nombre_proveedor', 'descripcion'],
+            function ($query) use ($request){
+                // Aqui accedes a la relacion usando el nombre de la funcion que agregaste en el modelo
+                //nombre de relacion en modelo "productos"
+                $query->with(['productos']);
 
-        if ($request->ajax()) {
-            if ($request->has('bulk')) {
-                return [
-                    'bulkItems' => $data->pluck('id')
-                ];
+                
+     
+                $query->join('producto_tbl', 'producto_tbl.id', '=', 'compras_tbl.producto_id');
+
+                if($request->has('producto_tbl')){
+                    $query->whereIn('producto_id', $request->get('producto_tbl'));
+                }
+                
             }
+        );
+        DB::connection('mysql')->statement('UPDATE compras_tbl , producto_tbl SET compras_tbl.nombre_producto = producto_tbl.nombre where compras_tbl.producto_id=producto_tbl.id');
+        if ($request->ajax()) {
             return ['data' => $data];
         }
 
-        return view('admin.compras-tbl.index', ['data' => $data]);
+        return view('admin.compras-tbl.index', ['data' => $data, 'producto_tbl' => ProductoTbl::all()]);
     }
 
     /**
@@ -65,7 +75,7 @@ class ComprasTblController extends Controller
     {
         $this->authorize('admin.compras-tbl.create');
 
-        return view('admin.compras-tbl.create');
+        return view('admin.compras-tbl.create' , ['producto_tbl' => ProductoTbl::all()]);
     }
 
     /**
@@ -78,7 +88,7 @@ class ComprasTblController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $sanitized['producto_id'] = $request->getProductoTblId();
         // Store the ComprasTbl
         $comprasTbl = ComprasTbl::create($sanitized);
 
@@ -113,10 +123,10 @@ class ComprasTblController extends Controller
     public function edit(ComprasTbl $comprasTbl)
     {
         $this->authorize('admin.compras-tbl.edit', $comprasTbl);
-
+        $comprasTbl->load('productos');
 
         return view('admin.compras-tbl.edit', [
-            'comprasTbl' => $comprasTbl,
+            'comprasTbl' => $comprasTbl, 'producto_tbl' => ProductoTbl::all()
         ]);
     }
 
@@ -131,7 +141,7 @@ class ComprasTblController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-
+        $sanitized['producto_id'] = $request->getProductoTblId();
         // Update changed values ComprasTbl
         $comprasTbl->update($sanitized);
 
