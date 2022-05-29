@@ -10,6 +10,8 @@
             <compras-tbl-form
                 :action="'{{ $comprasTbl->resource_url }}'"
                 :data="{{ $comprasTbl->toJson() }}"
+                :producto_id="{{$producto_tbl->toJson()}}"
+                :proovedor_id="{{$provedores_tbl->toJson()}}"
                 v-cloak
                 inline-template>
             

@@ -59,4 +59,11 @@ class UpdateComprasTbl extends FormRequest
 
         return null;
     }
+    public function getProvedoresTblId(){
+        if ($this->has('proovedor_id')){
+            return $this->get('proovedor_id')['id'];
+        }
+
+        return null;
+    }
 }

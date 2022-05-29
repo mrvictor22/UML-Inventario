@@ -27,7 +27,6 @@ class StoreProductoBodegaTbl extends FormRequest
     {
         return [
             'producto_id' => ['required'],
-            'bodega_id' => ['required', 'integer'],
             'ubicacion_codigo' => ['required', 'string'],
             'cantidad' => ['required', 'integer'],
             'nota' => ['nullable', 'string'],

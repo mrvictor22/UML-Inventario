@@ -41,4 +41,7 @@ class ComprasTbl extends Model
     public function productos() {
         return $this->belongsTo(ProductoTbl::class);
     }
+    public function proov() {
+        return $this->belongsTo(ProvedoresTbl::class);
+    }
 }

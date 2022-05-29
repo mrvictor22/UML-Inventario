@@ -10,6 +10,7 @@
             <producto-bodega-tbl-form
                 :action="'{{ $productoBodegaTbl->resource_url }}'"
                 :data="{{ $productoBodegaTbl->toJson() }}"
+                :producto_id="{{$producto_tbl->toJson()}}"
                 v-cloak
                 inline-template>
             

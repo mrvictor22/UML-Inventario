@@ -6,6 +6,7 @@
 
     <compras-tbl-listing
         :data="{{ $data->toJson() }}"
+        
         :url="'{{ url('admin/compras-tbls') }}'"
         inline-template>
 
@@ -14,6 +15,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> {{ trans('admin.compras-tbl.actions.index') }}
+                        <a class="btn btn-primary btn-sm pull-right m-b-0 ml-2" href="{{ url('admin/compras-tbls/export') }}" role="button"><i class="fa fa-file-excel-o"></i>&nbsp; Exportar Reporte</a>
                         <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/compras-tbls/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.compras-tbl.actions.create') }}</a>
                     </div>
                     <div class="card-body" v-cloak>
@@ -53,7 +55,7 @@
                                         <th is='sortable' :column="'nombre_producto'">{{ trans('admin.compras-tbl.columns.nombre_producto') }}</th>
                                        
                                         <th is='sortable' :column="'nombre_proveedor'">{{ trans('admin.compras-tbl.columns.nombre_proveedor') }}</th>
-                                        <th is='sortable' :column="'proovedor_id'">{{ trans('admin.compras-tbl.columns.proovedor_id') }}</th>
+                                      
                                         <th is='sortable' :column="'fecha_pedido'">{{ trans('admin.compras-tbl.columns.fecha_pedido') }}</th>
                                         <th is='sortable' :column="'fecha_entregado'">{{ trans('admin.compras-tbl.columns.fecha_entregado') }}</th>
                                         <th is='sortable' :column="'enabled'">{{ trans('admin.compras-tbl.columns.enabled') }}</th>
@@ -84,7 +86,7 @@
                                         <td>@{{ item.nombre_producto }}</td>
                                      
                                         <td>@{{ item.nombre_proveedor }}</td>
-                                        <td>@{{ item.proovedor_id }}</td>
+                                     
                                         <td>@{{ item.fecha_pedido | date }}</td>
                                         <td>@{{ item.fecha_entregado | date }}</td>
                                         <td>

@@ -114,7 +114,8 @@ class ProductoBodegaTblController extends Controller
         // info($request);
         // Store the ProductoBodegaTbl
         $productoBodegaTbl = ProductoBodegaTbl::create($sanitized);
-
+        DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , producto_tbl SET producto_bodega_tbl.nombre = producto_tbl.nombre where producto_bodega_tbl.producto_id=producto_tbl.id');
+        DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , bodega_tbl SET producto_bodega_tbl.bodega_id = bodega_tbl.id, producto_bodega_tbl.bodega_nombre = bodega_tbl.nombre where  bodega_tbl.id = 5 ');
         if ($request->ajax()) {
             return ['redirect' => url('admin/producto-bodega-tbls'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
@@ -148,7 +149,7 @@ class ProductoBodegaTblController extends Controller
         $this->authorize('admin.producto-bodega-tbl.edit', $productoBodegaTbl);
 
         $productoBodegaTbl->load('productos');
-        $productoBodegaTbl->load('bodega');
+
 
         return view('admin.producto-bodega-tbl.edit', [
             'productoBodegaTbl' => $productoBodegaTbl, 'bodega_tbl' => BodegaTbl::all(),'producto_tbl' => ProductoTbl::all()
@@ -166,12 +167,13 @@ class ProductoBodegaTblController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $sanitized['bodega_id'] = $request->getBodegaTblId();
+
         $sanitized['producto_id'] = $request->getProductoTblId();
         
         // Update changed values ProductoBodegaTbl
         $productoBodegaTbl->update($sanitized);
-
+        DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , producto_tbl SET producto_bodega_tbl.nombre = producto_tbl.nombre where producto_bodega_tbl.producto_id=producto_tbl.id');
+        DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , bodega_tbl SET producto_bodega_tbl.bodega_id = bodega_tbl.id, producto_bodega_tbl.bodega_nombre = bodega_tbl.nombre where  bodega_tbl.id = 5 ');
         if ($request->ajax()) {
             return [
                 'redirect' => url('admin/producto-bodega-tbls'),

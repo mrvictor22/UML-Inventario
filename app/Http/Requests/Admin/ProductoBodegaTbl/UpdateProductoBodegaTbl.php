@@ -26,8 +26,8 @@ class UpdateProductoBodegaTbl extends FormRequest
     public function rules(): array
     {
         return [
-            'producto_id' => ['nullable', 'integer'],
-            'bodega_id' => ['sometimes', 'integer'],
+            'producto_id' => ['nullable'],
+            'bodega_id' => ['sometimes'],
             'ubicacion_codigo' => ['sometimes', 'string'],
             'cantidad' => ['sometimes', 'integer'],
             'nota' => ['nullable', 'string'],
@@ -49,4 +49,13 @@ class UpdateProductoBodegaTbl extends FormRequest
 
         return $sanitized;
     }
+
+    public function getProductoTblId(){
+        if ($this->has('producto_id')){
+            return $this->get('producto_id')['id'];
+        }
+
+        return null;
+    }
 }
+

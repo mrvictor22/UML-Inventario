@@ -11,6 +11,7 @@
         <compras-tbl-form
             :action="'{{ url('admin/compras-tbls') }}'"
             :producto_id="{{$producto_tbl->toJson()}}"
+            :proovedor_id="{{$provedores_tbl->toJson()}}"
             v-cloak
             inline-template>
 

@@ -33,7 +33,7 @@ class StoreComprasTbl extends FormRequest
             'descripcion' => ['nullable', 'string'],
             'fecha_pedido' => ['nullable', 'date'],
             'fecha_entregado' => ['nullable', 'date'],
-            'enabled' => ['required', 'boolean'],
+            'enabled' => ['required'],
             
         ];
     }
@@ -54,6 +54,14 @@ class StoreComprasTbl extends FormRequest
     public function getProductoTblId(){
         if ($this->has('producto_id')){
             return $this->get('producto_id')['id'];
+        }
+
+        return null;
+    }
+
+    public function getProvedoresTblId(){
+        if ($this->has('proovedor_id')){
+            return $this->get('proovedor_id')['id'];
         }
 
         return null;

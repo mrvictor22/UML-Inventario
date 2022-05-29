@@ -36,19 +36,41 @@
     </div>
 </div>
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('nombre_proveedor'), 'has-success': fields.nombre_proveedor && fields.nombre_proveedor.valid }">
+{{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('nombre_proveedor'), 'has-success': fields.nombre_proveedor && fields.nombre_proveedor.valid }">
     <label for="nombre_proveedor" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.compras-tbl.columns.nombre_proveedor') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.nombre_proveedor" v-validate="''" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('nombre_proveedor'), 'form-control-success': fields.nombre_proveedor && fields.nombre_proveedor.valid}" id="nombre_proveedor" name="nombre_proveedor" placeholder="{{ trans('admin.compras-tbl.columns.nombre_proveedor') }}">
         <div v-if="errors.has('nombre_proveedor')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('nombre_proveedor') }}</div>
     </div>
-</div>
+</div> --}}
 
-<div class="form-group row align-items-center" :class="{'has-danger': errors.has('proovedor_id'), 'has-success': fields.proovedor_id && fields.proovedor_id.valid }">
+{{-- <div class="form-group row align-items-center" :class="{'has-danger': errors.has('proovedor_id'), 'has-success': fields.proovedor_id && fields.proovedor_id.valid }">
     <label for="proovedor_id" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.compras-tbl.columns.proovedor_id') }}</label>
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         <input type="text" v-model="form.proovedor_id" v-validate="'integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('proovedor_id'), 'form-control-success': fields.proovedor_id && fields.proovedor_id.valid}" id="proovedor_id" name="proovedor_id" placeholder="{{ trans('admin.compras-tbl.columns.proovedor_id') }}">
         <div v-if="errors.has('proovedor_id')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('proovedor_id') }}</div>
+    </div>
+</div> --}}
+
+<div class="form-group row align-items-center"
+     :class="{'has-danger': errors.has('proovedor_id'), 'has-success': this.fields.proovedor_id && this.fields.proovedor_id.valid }">
+    <label for="proovedor_id"
+    class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">Proovedor</label>
+           <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+
+        <multiselect
+            v-model="form.proovedor_id"
+            :options="proovedor_id"
+            :multiple="false"
+            track-by="id"
+            label="nombre"
+            tag-placeholder="{{ __('Seleccionar proovedor') }}"
+            placeholder="{{ __('Proovedor') }}">
+        </multiselect>
+
+        <div v-if="errors.has('proovedor_id')" class="form-control-feedback form-text" v-cloak>@{{
+            errors.first('proovedor_id') }}
+        </div>
     </div>
 </div>
 

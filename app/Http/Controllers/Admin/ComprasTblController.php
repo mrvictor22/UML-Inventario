@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\ComprasTbl\StoreComprasTbl;
 use App\Http\Requests\Admin\ComprasTbl\UpdateComprasTbl;
 use App\Models\ProductoTbl;
 use App\Models\ComprasTbl;
+use App\Models\ProvedoresTbl;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -20,7 +21,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ComprasExport;
 class ComprasTblController extends Controller
 {
 
@@ -45,11 +47,12 @@ class ComprasTblController extends Controller
             function ($query) use ($request){
                 // Aqui accedes a la relacion usando el nombre de la funcion que agregaste en el modelo
                 //nombre de relacion en modelo "productos"
-                $query->with(['productos']);
+                $query->with(['productos','proov']);
 
                 
      
                 $query->join('producto_tbl', 'producto_tbl.id', '=', 'compras_tbl.producto_id');
+                $query->join('provedores_tbl', 'provedores_tbl.id', '=', 'compras_tbl.proovedor_id');
 
                 if($request->has('producto_tbl')){
                     $query->whereIn('producto_id', $request->get('producto_tbl'));
@@ -58,11 +61,12 @@ class ComprasTblController extends Controller
             }
         );
         DB::connection('mysql')->statement('UPDATE compras_tbl , producto_tbl SET compras_tbl.nombre_producto = producto_tbl.nombre where compras_tbl.producto_id=producto_tbl.id');
+        DB::connection('mysql')->statement('UPDATE compras_tbl , provedores_tbl SET compras_tbl.nombre_proveedor = provedores_tbl.nombre where compras_tbl.proovedor_id=provedores_tbl.id');
         if ($request->ajax()) {
             return ['data' => $data];
         }
 
-        return view('admin.compras-tbl.index', ['data' => $data, 'producto_tbl' => ProductoTbl::all()]);
+        return view('admin.compras-tbl.index', ['data' => $data, 'producto_tbl' => ProductoTbl::all(), 'provedores_tbl' => ProvedoresTbl::all()]);
     }
 
     /**
@@ -75,7 +79,7 @@ class ComprasTblController extends Controller
     {
         $this->authorize('admin.compras-tbl.create');
 
-        return view('admin.compras-tbl.create' , ['producto_tbl' => ProductoTbl::all()]);
+        return view('admin.compras-tbl.create' , ['producto_tbl' => ProductoTbl::all(), 'provedores_tbl' => ProvedoresTbl::all()]);
     }
 
     /**
@@ -89,9 +93,13 @@ class ComprasTblController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized['producto_id'] = $request->getProductoTblId();
+        $sanitized['proovedor_id'] = $request->getProvedoresTblId();
+
+        
         // Store the ComprasTbl
         $comprasTbl = ComprasTbl::create($sanitized);
-
+        DB::connection('mysql')->statement('UPDATE compras_tbl , producto_tbl SET compras_tbl.nombre_producto = producto_tbl.nombre where compras_tbl.producto_id=producto_tbl.id');
+        DB::connection('mysql')->statement('UPDATE compras_tbl , provedores_tbl SET compras_tbl.nombre_proveedor = provedores_tbl.nombre where compras_tbl.proovedor_id=provedores_tbl.id');
         if ($request->ajax()) {
             return ['redirect' => url('admin/compras-tbls'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
@@ -124,9 +132,10 @@ class ComprasTblController extends Controller
     {
         $this->authorize('admin.compras-tbl.edit', $comprasTbl);
         $comprasTbl->load('productos');
+        $comprasTbl->load('proov');
 
         return view('admin.compras-tbl.edit', [
-            'comprasTbl' => $comprasTbl, 'producto_tbl' => ProductoTbl::all()
+            'comprasTbl' => $comprasTbl, 'producto_tbl' => ProductoTbl::all(), 'provedores_tbl' => ProvedoresTbl::all()
         ]);
     }
 
@@ -142,9 +151,11 @@ class ComprasTblController extends Controller
         // Sanitize input
         $sanitized = $request->getSanitized();
         $sanitized['producto_id'] = $request->getProductoTblId();
+        $sanitized['proovedor_id'] = $request->getProvedoresTblId();
         // Update changed values ComprasTbl
         $comprasTbl->update($sanitized);
-
+        DB::connection('mysql')->statement('UPDATE compras_tbl , producto_tbl SET compras_tbl.nombre_producto = producto_tbl.nombre where compras_tbl.producto_id=producto_tbl.id');
+        DB::connection('mysql')->statement('UPDATE compras_tbl , provedores_tbl SET compras_tbl.nombre_proveedor = provedores_tbl.nombre where compras_tbl.proovedor_id=provedores_tbl.id');
         if ($request->ajax()) {
             return [
                 'redirect' => url('admin/compras-tbls'),
@@ -194,5 +205,10 @@ class ComprasTblController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+
+    public function exportar()
+    {
+        return Excel::download(new ComprasExport, 'exports.csv');
     }
 }

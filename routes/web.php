@@ -130,6 +130,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'ComprasTblController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{comprasTbl}',                                'ComprasTblController@update')->name('update');
             Route::delete('/{comprasTbl}',                              'ComprasTblController@destroy')->name('destroy');
+            Route::get('/export',                         'ComprasTblController@exportar')->name('export');
         });
     });
 });
