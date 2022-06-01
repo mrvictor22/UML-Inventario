@@ -40,7 +40,7 @@ class ComprasTblController extends Controller
             $request,
 
             // set columns to query
-            ['id', 'nombre_producto', 'nombre_proveedor', 'proovedor_id', 'fecha_pedido', 'fecha_entregado', 'enabled'],
+            ['id', 'nombre_producto', 'nombre_proveedor', 'proovedor_id', 'fecha_pedido','cant', 'fecha_entregado', 'enabled'],
 
             // set columns to searchIn
             ['id', 'nombre_producto', 'nombre_proveedor', 'descripcion'],
@@ -131,9 +131,8 @@ class ComprasTblController extends Controller
     public function edit(ComprasTbl $comprasTbl)
     {
         $this->authorize('admin.compras-tbl.edit', $comprasTbl);
-        $comprasTbl->load('productos');
-        $comprasTbl->load('proov');
-
+        $comprasTbl->load(['productos','proov']);
+      
         return view('admin.compras-tbl.edit', [
             'comprasTbl' => $comprasTbl, 'producto_tbl' => ProductoTbl::all(), 'provedores_tbl' => ProvedoresTbl::all()
         ]);

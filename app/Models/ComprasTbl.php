@@ -14,6 +14,7 @@ class ComprasTbl extends Model
         'nombre_proveedor',
         'proovedor_id',
         'descripcion',
+        'cant',
         'fecha_pedido',
         'fecha_entregado',
         'enabled',

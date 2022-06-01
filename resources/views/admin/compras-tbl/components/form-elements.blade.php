@@ -84,6 +84,14 @@
     </div>
 </div>
 
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('cant'), 'has-success': fields.cant && fields.cant.valid }">
+    <label for="cant" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">Cantidad</label>
+        <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <input type="text" v-model="form.cant" v-validate="'required|integer'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('cant'), 'form-control-success': fields.cant && fields.cant.valid}" id="cant" name="cant" placeholder="{{ trans('admin.producto-bodega-tbl.columns.cant') }}">
+        <div v-if="errors.has('cant')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('cant') }}</div>
+    </div>
+</div>
+
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('fecha_pedido'), 'has-success': fields.fecha_pedido && fields.fecha_pedido.valid }">
     <label for="fecha_pedido" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.compras-tbl.columns.fecha_pedido') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-sm-8'">

@@ -31,6 +31,7 @@ class UpdateComprasTbl extends FormRequest
             'nombre_proveedor' => ['nullable'],
             'proovedor_id' => ['nullable'],
             'descripcion' => ['nullable', 'string'],
+            'cant' => ['nullable'],
             'fecha_pedido' => ['nullable', 'date'],
             'fecha_entregado' => ['nullable', 'date'],
             'enabled' => ['sometimes', 'boolean'],

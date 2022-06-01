@@ -14,6 +14,7 @@ Vue.component('compras-tbl-form', {
                 producto_id:  '' ,
                 proovedor_id:  '' ,
                 descripcion:  '' ,
+                cant:  '' ,
                 fecha_pedido:  '' ,
                 fecha_entregado:  '' ,
                 enabled:  false ,
