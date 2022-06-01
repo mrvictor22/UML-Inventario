@@ -11,6 +11,7 @@ use App\Http\Requests\Admin\ComprasTbl\UpdateComprasTbl;
 use App\Models\ProductoTbl;
 use App\Models\ComprasTbl;
 use App\Models\ProvedoresTbl;
+use App\Models\ProductoBodegaTbl;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -94,10 +95,22 @@ class ComprasTblController extends Controller
         $sanitized = $request->getSanitized();
         $sanitized['producto_id'] = $request->getProductoTblId();
         $sanitized['proovedor_id'] = $request->getProvedoresTblId();
-
+        $id_producto    = $sanitized['producto_id'];  
+        $terminada      = $sanitized['enabled'];
+        $cantidad       = $sanitized['cant'];
         
         // Store the ComprasTbl
         $comprasTbl = ComprasTbl::create($sanitized);
+        if ($terminada == 1) {
+
+           
+            $old_cant = ProductoBodegaTbl::select('cantidad')->where('producto_id', $id_producto)->first();
+            // dd($old_cant);
+            $old_cantidad = $old_cant['cantidad'];
+            $op= $old_cantidad + $cantidad;
+           $query = ProductoBodegaTbl::where('producto_id', $id_producto)->update(['cantidad' => $op]);
+           
+        }
         DB::connection('mysql')->statement('UPDATE compras_tbl , producto_tbl SET compras_tbl.nombre_producto = producto_tbl.nombre where compras_tbl.producto_id=producto_tbl.id');
         DB::connection('mysql')->statement('UPDATE compras_tbl , provedores_tbl SET compras_tbl.nombre_proveedor = provedores_tbl.nombre where compras_tbl.proovedor_id=provedores_tbl.id');
         if ($request->ajax()) {
@@ -151,10 +164,25 @@ class ComprasTblController extends Controller
         $sanitized = $request->getSanitized();
         $sanitized['producto_id'] = $request->getProductoTblId();
         $sanitized['proovedor_id'] = $request->getProvedoresTblId();
+        $id_producto    = $sanitized['producto_id'];  
+        $terminada      = $sanitized['enabled'];
+        $cantidad       = $sanitized['cant'];
         // Update changed values ComprasTbl
         $comprasTbl->update($sanitized);
+
+        if ($terminada == 1) {
+
+           
+            $old_cant = ProductoBodegaTbl::select('cantidad')->where('producto_id', $id_producto)->first();
+            // dd($old_cant);
+            $old_cantidad = $old_cant['cantidad'];
+            $op= $old_cantidad + $cantidad;
+           $query = ProductoBodegaTbl::where('producto_id', $id_producto)->update(['cantidad' => $op]);
+           
+        }
         DB::connection('mysql')->statement('UPDATE compras_tbl , producto_tbl SET compras_tbl.nombre_producto = producto_tbl.nombre where compras_tbl.producto_id=producto_tbl.id');
         DB::connection('mysql')->statement('UPDATE compras_tbl , provedores_tbl SET compras_tbl.nombre_proveedor = provedores_tbl.nombre where compras_tbl.proovedor_id=provedores_tbl.id');
+        
         if ($request->ajax()) {
             return [
                 'redirect' => url('admin/compras-tbls'),
