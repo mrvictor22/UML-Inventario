@@ -85,6 +85,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'ProvedoresTblController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{provedoresTbl}',                             'ProvedoresTblController@update')->name('update');
             Route::delete('/{provedoresTbl}',                           'ProvedoresTblController@destroy')->name('destroy');
+            Route::get('/export',                         'ProvedoresTblController@exportar')->name('export');
         });
     });
 });

@@ -19,7 +19,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProovedoresExport;
 class ProvedoresTblController extends Controller
 {
 
@@ -184,5 +185,10 @@ class ProvedoresTblController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+
+    public function exportar()
+    {
+        return Excel::download(new ProovedoresExport, 'proovedores_export.csv');
     }
 }
