@@ -117,6 +117,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'ProductoBodegaTblController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{productoBodegaTbl}',                         'ProductoBodegaTblController@update')->name('update');
             Route::delete('/{productoBodegaTbl}',                       'ProductoBodegaTblController@destroy')->name('destroy');
+            Route::get('/export',                                       'ProductoBodegaTblController@exportar')->name('export');
         });
     });
 });

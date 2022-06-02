@@ -21,6 +21,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InventarioExport;
 
 class ProductoBodegaTblController extends Controller
 {
@@ -223,5 +225,9 @@ class ProductoBodegaTblController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+    public function exportar()
+    {
+        return Excel::download(new InventarioExport, 'inventario_export.csv');
     }
 }
