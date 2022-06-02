@@ -101,6 +101,7 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'ProductoTblController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{productoTbl}',                               'ProductoTblController@update')->name('update');
             Route::delete('/{productoTbl}',                             'ProductoTblController@destroy')->name('destroy');
+            Route::get('/export',                                       'ProductoTblController@exportar')->name('export');
         });
     });
 });

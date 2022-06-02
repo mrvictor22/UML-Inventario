@@ -19,7 +19,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductoExport;
 class ProductoTblController extends Controller
 {
 
@@ -184,5 +185,10 @@ class ProductoTblController extends Controller
         });
 
         return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+    }
+
+    public function exportar()
+    {
+        return Excel::download(new ProductoExport, 'producto_export.csv');
     }
 }
