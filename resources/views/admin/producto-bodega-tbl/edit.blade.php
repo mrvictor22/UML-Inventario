@@ -23,6 +23,9 @@
 
                     <div class="card-body">
                         @include('admin.producto-bodega-tbl.components.form-elements')
+                        <hr>
+                        Sección de devoluciones
+                        @include('admin.producto-bodega-tbl.components.form-elements-inv')
                     </div>
                     
                     

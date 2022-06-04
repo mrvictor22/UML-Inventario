@@ -15,6 +15,9 @@ class ProductoBodegaTbl extends Model
         'ubicacion_codigo',
         'cantidad',
         'nota',
+        'date_devolucion',
+        'cantidad_devolucion',
+        'nota_devolucion',
     
     ];
     

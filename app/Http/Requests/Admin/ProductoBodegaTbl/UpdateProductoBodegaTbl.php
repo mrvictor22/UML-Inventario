@@ -31,6 +31,9 @@ class UpdateProductoBodegaTbl extends FormRequest
             'ubicacion_codigo' => ['sometimes', 'string'],
             'cantidad' => ['sometimes', 'integer'],
             'nota' => ['nullable', 'string'],
+            'date_devolucion' => ['nullable'],
+            'cantidad_devolucion' => ['nullable'],
+            'nota_devolucion' => ['nullable'],
             
         ];
     }

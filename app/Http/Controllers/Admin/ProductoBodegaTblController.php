@@ -171,8 +171,17 @@ class ProductoBodegaTblController extends Controller
         $sanitized = $request->getSanitized();
 
         $sanitized['producto_id'] = $request->getProductoTblId();
-        
+        if ($sanitized['cantidad_devolucion'] > 1) {
+
+            $cant_devuelto = $sanitized['cantidad_devolucion'];
+            $stock_actual = $sanitized['cantidad'];
+            $new_cantidad = $stock_actual - $cant_devuelto;
+          
+            $productoBodegaTbl->where('producto_id' , $sanitized['producto_id'])->update(['cantidad' => $new_cantidad]);
+        }
+      
         // Update changed values ProductoBodegaTbl
+       
         $productoBodegaTbl->update($sanitized);
         DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , producto_tbl SET producto_bodega_tbl.nombre = producto_tbl.nombre where producto_bodega_tbl.producto_id=producto_tbl.id');
         DB::connection('mysql')->statement('UPDATE producto_bodega_tbl , bodega_tbl SET producto_bodega_tbl.bodega_id = bodega_tbl.id, producto_bodega_tbl.bodega_nombre = bodega_tbl.nombre where  bodega_tbl.id = 5 ');

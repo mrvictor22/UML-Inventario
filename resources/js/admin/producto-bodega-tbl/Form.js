@@ -16,7 +16,10 @@ Vue.component('producto-bodega-tbl-form', {
                 cantidad:  '' ,
                 nota:  '' ,
                 producto_id:  '' ,
-                bodega:  '' 
+                bodega:  '', 
+                date_devolucion:  '', 
+                cantidad_devolucion:  '', 
+                nota_devolucion:  '' 
 
                 
             }
